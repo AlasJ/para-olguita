@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Olguita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-suave: #fdf2f5;
+            --rosa-fuerte: #d48aa5;
+            --rosa-acento: #ffb7c5;
+            --texto: #5a4b4f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Fondo de pétalos cayendo */
+        .lluvia-flores {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .petalo {
+            position: absolute;
+            background-color: var(--rosa-acento);
+            border-radius: 150% 0 150% 0;
+            opacity: 0.4;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .contenedor {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 35px rgba(212, 138, 165, 0.15);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .decoracion-floral {
+            font-size: 2rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rosa-fuerte);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .poema {
+            color: var(--texto);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .poema p {
+            margin-bottom: 20px;
+        }
+
+        .resaltado {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--rosa-fuerte);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: var(--rosa-fuerte);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .contenedor { padding: 30px 20px; }
+            h1 { font-size: 2rem; }
+            .poema { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lluvia-flores" id="flores"></div>
+
+    <div class="contenedor">
+        <span class="decoracion-floral">🌸</span>
+        <h1>Para Olguita</h1>
+
+        <div class="poema">
+            <p><strong>Olguita,</strong></p>
+
+            <p>
+                Hay presencias que no se explican, solo se sienten,<br>
+                y la tuya llega con <span class="resaltado">carisma</span>,<br>
+                con esa luz tranquila que acompaña sin hacer ruido.
+            </p>
+
+            <p>
+                Tu fortaleza se nota en cada paso,<br>
+                en la forma en que sigues adelante,<br>
+                inteligente, firme,<br>
+                ganándote todo por tu propio mérito.
+            </p>
+
+            <p>
+                Tu voz, tan aguda,<br>
+                me despierta algo que no sé nombrar,<br>
+                pero que siempre me emociona cuando te escucho.
+            </p>
+
+            <p>
+                Y tus labios,<br>
+                tan suaves que <span class="resaltado">parecen nubes</span>,<br>
+                tan bellos que el tiempo se detiene<br>
+                un segundo al mirarlos.
+            </p>
+
+            <p>
+                Admiro a la mujer que eres,<br>
+                la que no se rinde,<br>
+                la que cae y se levanta sin perderse a sí misma.
+            </p>
+
+            <p>
+                Hay personas que se aprecian,<br>
+                y otras que se quedan un poco más dentro del corazón…<br>
+                y tú, sin dudarlo,<br>
+                <strong>Eres una de ellas.</strong>
+            </p>
+
+            
+        </div>
+
+        <footer>
+            ❦
+        </footer>
+    </div>
+
+    <script>
+        // Crear pétalos de forma aleatoria
+        function crearPetalos() {
+            const contenedorFlores = document.getElementById('flores');
+            const numeroPetalos = 15;
+
+            for (let i = 0; i < numeroPetalos; i++) {
+                const petalo = document.createElement('div');
+                petalo.classList.add('petalo');
+                
+                // Valores aleatorios para cada pétalo
+                const tamaño = Math.random() * 15 + 10 + 'px';
+                petalo.style.width = tamaño;
+                petalo.style.height = tamaño;
+                petalo.style.left = Math.random() * 100 + 'vw';
+                petalo.style.animationDuration = Math.random() * 5 + 5 + 's';
+                petalo.style.animationDelay = Math.random() * 5 + 's';
+                
+                contenedorFlores.appendChild(petalo);
+            }
+        }
+
+        // Animación de entrada
+        document.body.style.opacity = 0;
+        window.onload = () => {
+            crearPetalos();
+            document.body.style.transition = "opacity 2s ease";
+            document.body.style.opacity = 1;
+        };
+    </script>
+
+</body>
+</html>
